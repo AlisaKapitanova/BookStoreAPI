@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "837fe08e-7de1-4ff7-af14-fa0c83fa2795",
+		"name": "Account",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authorisation posiv",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97ac6abe-52ac-4fb7-a994-3711846b51fe",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"true\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "01570079-6eeb-4969-9c84-4d1a50518952",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"AlisaKapitanova\",\r\n  \"password\": \"Qaz123edc@\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/Account/v1/Authorized"
+			},
+			"response": []
+		},
+		{
+			"name": "Authorisation invalid username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97ac6abe-52ac-4fb7-a994-3711846b51fe",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"var responseBody = pm.response.json();\r",
+							"pm.test(\"Проверка поля 'code'\", function() {\r",
+							"    pm.expect(responseBody.code).to.eql(\"1207\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Проверка поля 'message'\", function() {\r",
+							"    pm.expect(responseBody.message).to.eql(\"User not found!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "6305e54f-57a9-4584-83a9-875a5ab4ac60",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"Alisanew\",\r\n  \"password\": \"Qaz123edc@\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/Account/v1/Authorized"
+			},
+			"response": []
+		},
+		{
+			"name": "Authorisation invalid password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97ac6abe-52ac-4fb7-a994-3711846b51fe",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"var responseBody = pm.response.json();\r",
+							"pm.test(\"Проверка поля 'code'\", function() {\r",
+							"    pm.expect(responseBody.code).to.eql(\"1207\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Проверка поля 'message'\", function() {\r",
+							"    pm.expect(responseBody.message).to.eql(\"User not found!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "f9cbcc75-c878-486c-918e-fd81a661bac9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"AlisaKapitanova\",\r\n  \"password\": \"Qaz123edc@hj\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/Account/v1/Authorized"
+			},
+			"response": []
+		}
+	]
+}
